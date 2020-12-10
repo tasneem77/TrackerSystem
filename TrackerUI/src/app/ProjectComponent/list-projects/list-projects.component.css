@@ -1,0 +1,7 @@
+.yourAcceptClass .ui-dialog-content .ui-confirmdialog-message {
+    color:red;
+}
+
+.yourRejectClass .ui-dialog-content .ui-confirmdialog-message {
+    color:red;
+}

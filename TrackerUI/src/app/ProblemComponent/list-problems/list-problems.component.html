@@ -1,0 +1,82 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <a [routerLink]="['/problem']"  class="btn btn-outline-info btn-sm"><mat-icon style="margin-top: -10px;">error_outline</mat-icon>Create</a>
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Problems</h4>
+                    </div>
+                    <div class="card-body">
+            
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe" style="width: 100%;">
+                                <thead>
+                                    <tr>  <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Periority
+                                    </th>
+                                   <th> Due Date</th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th> </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of lstProblems">
+                                        <td>
+                                            {{item.id}}
+                                        </td>
+
+                                        <td>
+                                            {{item.title}}
+                                        </td>
+                                        <td>
+                                            <div *ngIf="item.periorityId ==1">
+                                                <img src="../../assets/images/high-priority-icon_1.png" width="20"
+                                                    height="20" />
+                                            </div>
+                                            <div *ngIf="item.periorityId ==2">
+                                                <img src="../../assets/images/low-priority-icon_1.png" width="20"
+                                                    height="20" />
+                                            </div>
+                                        </td>
+
+
+                                        <td>
+                                           {{item.dueDate | date: 'yyyy-MM-dd'}}
+                                        </td>
+
+                                        <td>
+                                            <a [routerLink]="['/problem', item.id]"><mat-icon style="color:#578cc5">edit</mat-icon></a>
+                                          </td>
+                                          <td><a (click)="DeleteProblem(item.id)"><mat-icon style="color:#be5050" >delete</mat-icon></a>
+                                          </td>
+                                        <!-- <th>
+                                            <a [routerLink]="['/problem' , item.id]">
+                                                <mat-icon>edit</mat-icon>
+                                            </a>
+                                        </th>
+                                         <th> 
+                                            <a [routerLink]="" (click)="DeleteProblem(item.id)"> <mat-icon>delete</mat-icon></a>
+                                        </th> -->
+                                </tbody>
+                            </table>
+                            <!-- <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog> -->
+
+                            <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

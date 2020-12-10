@@ -1,0 +1,71 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <a [routerLink]="['/adduser']" class="btn btn-outline-info btn-sm"><mat-icon style="margin-top: -10px;">person</mat-icon>Create</a>
+             
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Users Roles</h4>
+                    </div>
+                    <div class="card-body">
+                        <table datatable id="dtTeam" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe"
+                            style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Username
+                                    </th>
+                                    <th>
+                                        E-mail
+                                    </th>
+                                    <th>
+                                        Role Name
+                                    </th>
+                                    <!-- <th>
+                                        Edit
+                                    </th> -->
+                                    <th>
+                                        Delete
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let usrrole of lstUserRoles">
+                                <tr>
+                                    <td>
+                                        {{usrrole.id}}
+                                    </td>
+                                    <td>
+                                        {{usrrole.userName}}
+                                    </td>
+                                    <td>
+                                        {{usrrole.email}}
+                                    </td>
+                                    <td>
+                                        {{usrrole.roleName}}
+                                    </td>
+                                      <!--<td>
+                                       <a [routerLink]="['/team', team.id]">
+                                            <mat-icon style="color:#578cc5">edit</mat-icon>
+                                        </a> 
+                                    </td>-->
+                                    <td>
+                                         <a (click)="DeleteUserRole(usrrole.id)">
+                                            <mat-icon style="color:#be5050">delete</mat-icon>
+                                        </a> 
+                                    </td>
+                            </tbody>
+                        </table>
+                        <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

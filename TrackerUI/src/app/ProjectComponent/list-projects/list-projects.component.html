@@ -1,0 +1,53 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <a *ngIf="userRole == 'PMO' || userRole == 'SuperAdmin'" [routerLink]="['/project']" class="btn btn-outline-info btn-sm"><mat-icon style="margin-top: -10px;">leaderboard</mat-icon>Create</a>
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Projects</h4>
+          </div>
+          <div class="card-body">
+    <!-- {{userRole}} -->
+              <table datatable  id="dtProjects" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+
+                    <th>Name</th>
+                    <th *ngIf="userRole == 'PMO' || userRole == 'SuperAdmin'">Edit</th>
+                    <th *ngIf="userRole == 'PMO' || userRole == 'SuperAdmin'">Delete</th>
+                    <th>View</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let project of lstProjects">
+                    <td>
+                      {{ project.id }}
+                    </td>
+                    <td>
+                      {{ project.name }}
+                    </td>
+                    <td *ngIf="userRole == 'PMO' || userRole == 'SuperAdmin'"
+                     style="cursor:pointer;">
+                     <a [routerLink]="['/project', project.id]"><mat-icon style="color:#578cc5">edit</mat-icon>
+                    </a>
+                  </td>
+                   <td *ngIf="userRole == 'PMO' || userRole == 'SuperAdmin'"
+                    style="cursor:pointer;"><a (click)="DeleteProject(project.id)" >
+                      <mat-icon style="color:#be5050" *ngIf="rolename != 'CEO'">delete</mat-icon>
+                    </a>
+                    </td>
+                    <td  style="cursor:pointer;"><a [routerLink]="['/viewProject', project.id]"><mat-icon style="color:#578cc5">visibility</mat-icon></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

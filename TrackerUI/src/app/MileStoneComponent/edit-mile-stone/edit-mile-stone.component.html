@@ -1,0 +1,97 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Edit MileStone</h4>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="SubmitData()">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- <mat-form-field>
+                                        <mat-label>Project</mat-label>
+                                        <mat-select [(ngModel)]="MileStoneObj.projectId" name="projectId"
+                                            [value]="MileStoneObj.projectId">
+                                            <mat-option *ngFor="let item of lstProjects" [value]="item.id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field> -->
+
+
+                                </div>
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput name="miletitle" value="MileStoneObj.title"
+                                            [(ngModel)]="MileStoneObj.title" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Description</mat-label>
+                                        <textarea matInput value="MileStoneObj.description"
+                                            [(ngModel)]="MileStoneObj.description" name="discription"></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- <input type="date" name="startDate"
+                                   value="MileStoneObj.startDate"
+                                  [(ngModel)]="MileStoneObj.startDate"  class="form-control" />
+                               -->
+
+
+                                    <mat-form-field>
+                                        <mat-label>Start Date</mat-label>
+                                        <input matInput [matDatepicker]="picker"
+                                            value="{{MileStoneObj.startDate  | date:'yyyy-MM-dd'}}"
+                                            [(ngModel)]="MileStoneObj.startDate"
+                                            (dateChange)="addStartDate('change', $event)" name="startDate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- <input type="date" name="endDate"
+                                    value="MileStoneObj.endDate"
+                                   [(ngModel)]="MileStoneObj.endDate"  class="form-control"  />
+                                -->
+
+                                    <mat-form-field>
+                                        <mat-label>End Date</mat-label>
+                                        <input matInput [matDatepicker]="picker2"
+                                            value="{{MileStoneObj.endDate | date:'yyyy-MM-dd'}}"
+                                            [(ngModel)]="MileStoneObj.endDate"
+                                            (dateChange)="addEndDate('change', $event)" name="endDate" />
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker2></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label>Start Time</label>
+                                    <input type="time" class="form-control" [(ngModel)]="MileStoneObj.startTime"
+                                        value="{{MileStoneObj.startTime}}" name="startTime" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label>End Time</label>
+                                    <input type="time" class="form-control" value="{{MileStoneObj.endTime}}"
+                                        name="endTime" [(ngModel)]="MileStoneObj.endTime" />
+                                </div>
+
+
+
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

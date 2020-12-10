@@ -1,0 +1,38 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Add Client</h4>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="submitForm()">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Name</label>
+                                    <input class="form-control" [(ngModel)]="ClientObj.name" name="clientname" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Contact Person</label>
+                                    <input class="form-control" [(ngModel)]="ClientObj.contactPerson" name="person" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Mobile</label>
+                                    <input class="form-control" [(ngModel)]="ClientObj.mobile" name="mobile" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label>E-mail</label>
+                                    <input class="form-control" [(ngModel)]="ClientObj.email" name="email" />
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

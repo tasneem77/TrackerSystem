@@ -1,0 +1,483 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Edit Project</h4>
+          </div>
+          <div class="card-body">
+            <!-- <div class="col-md-12">
+              <a [routerLink]="['/milestones',Id]" class="btn btn-outline-info btn-sm">
+                <mat-icon style="margin-top: -10px;">subject</mat-icon>Project MileStones
+              </a>
+            </div> -->
+            <mat-tab-group dynamicHeight mat-align-tabs="start">
+              <mat-tab label="Project">
+                <form (ngSubmit)="SubmitData()">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-form-field>
+                        <mat-label>Organizations</mat-label>
+                        <mat-select [(ngModel)]="ProjectObj.organizationId" name="organizationId">
+                          <mat-option [selected]="org.id == ProjectObj.organizationId"
+                            *ngFor="let org of lstOrganizations" [value]="org.id">
+                            {{org.name}}
+                          </mat-option>
+                        </mat-select>                        
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                      <mat-form-field>
+                        <mat-label>Clients</mat-label>
+                        <mat-select [(ngModel)]="ProjectObj.clientId" name="clientId">
+                          <mat-option [selected]="clnt.Id == ProjectObj.clientId" *ngFor="let clnt of lstClients"
+                            [value]="clnt.id">
+                            {{clnt.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                      <label>Name</label>
+                      <input class="form-control" [(ngModel)]="ProjectObj.name" name="projectname" />
+                    </div>
+                    <div class="col-md-12">
+                      <label>Description</label>
+                      <angular-editor [config]="editorConfig" [(ngModel)]="ProjectObj.Discription"
+                        [ngModelOptions]="{ standalone: true }"></angular-editor>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Start Date</label>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker" value="{{
+                            ProjectObj.startDate | date: 'yyyy-MM-dd'
+                          }}" (dateChange)="addStartDate('change', $event)" name="startDate" />
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <label>End Date</label>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker2" value="{{ ProjectObj.endDate | date: 'yyyy-MM-dd' }}"
+                          (dateChange)="addEndDate('change', $event)" name="endDate" />
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <!-- <div class="col-md-6">
+                      <label>Start Time</label>
+                      <input type="time" class="form-control" value="{{ ProjectObj.startTime }}"
+                        [(ngModel)]="ProjectObj.startTime" name="startTime" [ngModelOptions]="{ standalone: true }" />
+                    </div>
+                    <div class="col-md-6">
+                      <label>End Time</label>
+                      <input type="time" class="form-control" value="{{ ProjectObj.endTime }}"
+                        [(ngModel)]="ProjectObj.endTime" name="endTime" [ngModelOptions]="{ standalone: true }" />
+                    </div> -->
+
+                  </div>
+                  <button mat-raised-button type="submit" class="btn btn-danger pull-right">
+                    Save
+                  </button>
+                  <div class="clearfix"></div>
+                </form>
+              </mat-tab>
+              <mat-tab label="StakeHolders">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>StakeHolder Name</mat-label>
+                      <input matInput name="shName" [(ngModel)]="ProjectObj.StakeHolderName" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-12">
+                    <button type="button" class="btn btn-default" (click)="addSHRow()">
+                      Add
+                    </button>
+                  </div>
+                  <div class="col-md-12">
+                    <table class="display" style="width: 100%">
+                      <thead>
+                        <tr>
+                          <th>Action</th>
+                          <th>StakeHolder Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="
+                            let dynamic of dynamicSHArray;
+                            let i = index
+                          ">
+                          <td (click)="deleteSHRow(i)">
+                            <mat-icon>delete</mat-icon>
+                          </td>
+                          <td>
+                            {{ dynamicSHArray[i].Name }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- <button
+                    type="button"
+                    (click)="Finish()"
+                    class="btn pull-right"
+                  >
+                    Finished
+                  </button>
+
+                  <button
+                    type="button"
+                    (click)="ThirdStep()"
+                    [disabled]="disableTab2"
+                    class="btn pull-right"
+                  >
+                    Next 3
+                  </button> -->
+                </div>
+                <br />
+                <br />
+                <table class="stripe" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let itm1 of lstProjectStakeHolders">
+                      <td>
+                        {{ itm1.id }}
+                      </td>
+                      <td>
+                        {{ itm1.pshName }}
+                      </td>
+                      <td style="cursor: pointer;">
+                        <a href="#" (click)="DeleteProjectStakeHolder(itm1.id)">
+                          <mat-icon style="color: #578cc5">delete</mat-icon>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+              </mat-tab>
+              <mat-tab label="Teams">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Teams</mat-label>
+                      <mat-select (selectionChange)="onChange($event)">
+                        <mat-option *ngFor="let team of lstTeams" [value]="team.id">
+                          {{team.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Positions</mat-label>
+                      <mat-select (selectionChange)="onPositionChange($event)">
+                        <mat-option *ngFor="let itm of lstPositions" [value]="itm.id">
+                          {{itm.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-12">
+                    <label for="options">Employees:</label>
+                    <div *ngFor="let emp of lstEmployees">
+                      <label>
+                        <input type="checkbox" name="chkbxemployees" value="{{ emp.value }}"
+                          [(ngModel)]="emp.checked" />
+                        {{ emp.name }}
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <button type="button" class="btn btn-default" (click)="addRow()">
+                      Add
+                    </button>
+                  </div>
+                  <div class="col-md-12">
+                    <table class="stripe" style="width: 100%">
+                      <thead>
+                        <tr>
+                          <th>Action</th>
+                          <th>Emp Name</th>
+                          <th>Team</th>
+                          <th>Position</th>
+                          <th style="display: none">Employee ID</th>
+                          <th style="display: none">Team ID</th>
+                          <th style="display: none">Position ID</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let dynamic of dynamicArray; let i = index">
+                          <td (click)="deleteRow(i)">
+                            <i class="fa fa-trash fa-2x"></i>
+                          </td>
+                          <td>
+                            {{ dynamicArray[i].employeename }}
+                          </td>
+                          <td>
+                            {{ dynamicArray[i].teamName }}
+                          </td>
+                          <td>
+                            {{ dynamicArray[i].positionName }}
+                          </td>
+                          <td style="display: none">
+                            {{ dynamicArray[i].employeeId }}
+                          </td>
+                          <td style="display: none">
+                            {{ dynamicArray[i].teamId }}
+                          </td>
+                          <td style="display: none">
+                            {{ dynamicArray[i].employeeId }}
+                          </td>
+                          <td style="display: none">
+                            {{ dynamicArray[i].ptePositionId }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <button type="button" (click)="submitTeamEmployees()" class="btn btn-danger pull-right">
+                      Save
+                    </button>
+                  </div>
+                </div>
+                <br />
+                <br />
+                <table class="stripe" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Team</th>
+                      <th>Employee</th>
+                      <th>Position</th>
+                      <th>Active/InActive</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of lstProjectTeamEmployees">
+                      <td>
+                        {{ item.projectTeamEmployeeId }}
+                      </td>
+                      <td>
+                        {{ item.teamName }}
+                      </td>
+                      <td>
+                        {{ item.employeeName }}
+                      </td>
+                      <td>
+                        {{ item.positionName }}
+                      </td>
+                      <td>
+                        <button class="btn btn-primary btn-sm" (click)="Activate(item.projectTeamEmployeeId)">
+                          Activate
+                        </button>
+                        <div *ngIf="item.isActive == true" class="material-icons" style="color: green">
+                          check_circle_outline
+                        </div>
+                        <div *ngIf="item.isActive == false" class="material-icons" style="color: red">
+                          highlight_off
+                        </div>
+                      </td>
+                      <td>
+                        <a (click)="
+                            DeleteProjectTeamEmployee(
+                              item.projectTeamEmployeeId
+                            )
+                          ">
+                          <mat-icon style="color: #578cc5">delete</mat-icon>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+              </mat-tab>
+
+
+              <mat-tab label="MileStones">
+
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Title</mat-label>
+                      <input matInput [(ngModel)]="ProjectObj.Title" name="miletitle" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Description</mat-label>
+                      <textarea matInput [(ngModel)]="ProjectObj.Description" name="description"></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Start Date</mat-label>
+                      <input matInput type="date" [(ngModel)]="ProjectObj.MSStartDate" name="MSStartDate" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>End Date</mat-label>
+                      <input matInput type="date" name="MSEndDate" [(ngModel)]="ProjectObj.MSEndDate" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Start Time</label>
+                    <!-- <input class="form-control" [ngxTimepicker]="picker" name="MileStartTime"
+                      [(ngModel)]="ProjectObj.MileStartTime">
+                    <ngx-material-timepicker #picker></ngx-material-timepicker> -->
+
+                    <input type="time" class="form-control" value="{{ ProjectObj.MileStartTime }}"
+                    [(ngModel)]="ProjectObj.MileStartTime" name="MileStartTime" [ngModelOptions]="{ standalone: true }" />
+                  </div>
+                  <div class="col-md-6">
+                    <label>End Time</label>
+                    <!-- <input class="form-control" [ngxTimepicker]="picker2" [(ngModel)]="ProjectObj.MSEndTime"
+                      name="MSEndTime">
+                    <ngx-material-timepicker #picker2></ngx-material-timepicker> -->
+
+                    <input type="time" class="form-control" value="{{ ProjectObj.MSEndTime }}"
+                    [(ngModel)]="ProjectObj.MSEndTime" name="MSEndTime" [ngModelOptions]="{ standalone: true }" />
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-default" (click)="addMileRow()">
+                    Add
+                  </button>
+                </div>
+                <div class="col-md-12">
+                  <table class="display" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th>Action</th>
+                        <th>Title</th>
+                        <th>Desc</th>
+                        <th>Start date</th>
+                        <th>Start time</th>
+                        <th>End date</th>
+                        <th>End time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let dynamic of dynamicMileArray;let i = index">
+                        <td (click)="deleteMileRow(i)">
+                          <mat-icon>delete</mat-icon>
+                        </td>
+                        <td>
+                          {{ dynamicMileArray[i].Title }}
+                        </td>
+                        <td>
+                          {{ dynamicMileArray[i].Description }}
+                        </td>
+                        <td>
+                          {{ dynamicMileArray[i].MSStartDate }}
+                        </td>
+                        <td>
+                          {{ dynamicMileArray[i].MileStartTime }}
+                        </td>
+                        <td>
+                          {{ dynamicMileArray[i].MSEndDate }}
+                        </td>
+                        <td>
+                          {{ dynamicMileArray[i].MSEndTime }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                  <div class="col-md-12">  
+                       <button type="button" (click)="submitProjectMileStones()" class="btn btn-danger pull-right">
+                    Save
+                  </button>
+                </div>
+                <br />
+                <br />
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header" style="background-color: papayawhip;">
+                      <b>Saved MileStones</b>
+                    </div>
+                    <div class="card-body">
+                      <table class="stripe" style="width: 100%">
+                        <thead>
+                          <tr>
+                            <th>Id</th>
+                            <th>title</th>
+                            <th>description</th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let item of lstProjectMilestones">
+                            <td>
+                              {{ item.id }}
+                            </td>
+                            <td>
+                              {{ item.title }}
+                            </td>
+                            <td>
+                              {{ item.description }}
+                            </td>
+                            <td>
+                              {{ item.startDate  | date:'yyyy-MM-dd'}}
+                            </td>
+                            <td>
+                              {{item.startTime}}
+                            </td>
+                            <td>
+                              {{ item.endDate  | date:'yyyy-MM-dd'}}
+                            </td>
+                            <td>
+                              {{ item.endTime }}
+                            </td>
+                            <td>
+                              <a (click)="
+                                  DeleteProjectMileStone(
+                                    item.Id
+                                  )
+                                ">
+                                <mat-icon style="color: #578cc5">delete</mat-icon>
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+
+                    </div>
+                  </div>
+
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

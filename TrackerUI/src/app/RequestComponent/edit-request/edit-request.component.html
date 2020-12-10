@@ -1,0 +1,167 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Add Request</h4>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="submitForm()">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-4">
+                                    Request Date: {{RequestObj.createdDate | date:'dd-MM-yyyy'}}</div>
+                                    <div class="col-md-4"> Request Time: {{RequestObj.createdTime}}
+                                    </div>
+                                    <div class="col-md-4"> Request Code : {{RequestObj.reqCode}}
+                                    </div>
+<input type="hidden"  [(ngModel)]="RequestObj.reqCode" />
+<input type="hidden"  [(ngModel)]="RequestObj.createdDate" />
+<input type="hidden"  [(ngModel)]="RequestObj.createdTime" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Project</label>
+                                    <select class="form-control" [ngModel]="RequestObj.projectId || ''" name="projectId"
+                                        (change)="onProjectChange($event)">
+                                        <option value="">Select One</option>
+                                        <option selected="{{RequestObj.projectId == pro.id}}"
+                                            *ngFor="let pro of lstProjects" value="{{pro.id}}">
+                                            {{pro.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Client</label>
+                                    <select class="form-control" [ngModel]="RequestObj.clientId || ''" name="clientId"
+                                        (change)="onClientChange($event)">
+                                        <option value="">Select One</option>
+                                        <option selected="{{RequestObj.clientId == clnt.id}}"
+                                            *ngFor="let clnt of lstClients" value="{{clnt.id}}">
+                                            {{clnt.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Subject</label>
+                                    <input class="form-control" [(ngModel)]="RequestObj.subject" name="subject" />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Note</label>
+                                    <textarea class="form-control" [(ngModel)]="RequestObj.note" name="note"></textarea>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Description</label>
+                                    <!-- <textarea class="form-control" [(ngModel)]="RequestObj.description"
+                                        name="desc"></textarea> -->
+
+                                    <angular-editor [config]="editorConfig" [(ngModel)]="RequestObj.description"
+                                        [ngModelOptions]="{standalone: true}"></angular-editor>
+                                </div>
+
+
+
+                                <div class="col-md-4">
+                                    <label>Request Type</label>
+                                    <select class="form-control" [ngModel]="RequestObj.requestTypeId ||''"
+                                        name="requestTypeId" (change)="onTypeChange($event)">
+                                        <option value="" selected>Select One</option>
+                                        <option selected="{{RequestObj.requestTypeId == reqType.id}}"
+                                            *ngFor="let reqType of lstRequestTypes" value="{{reqType.id}}">
+                                            {{reqType.name}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Status</label>
+                                    <select class="form-control" [ngModel]="RequestObj.requestStatusId || ''"
+                                        name="requestStatusId" (change)="onStatusChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option selected="{{RequestObj.requestStatusId == reqstatus.id}}"
+                                            *ngFor="let reqstatus of lstTypeStatus" value="{{reqstatus.id}}">
+                                            {{reqstatus.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Request Modes</label>
+                                    <select class="form-control" [ngModel]="RequestObj.requestModeId || ''"
+                                        name="requestModeId" (change)="onModeChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option selected="{{RequestObj.requestModeId == mode.id}}"
+                                            *ngFor="let mode of lstModes" value="{{mode.id}}">
+                                            {{mode.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Request Level</label>
+                                    <select class="form-control" [ngModel]="RequestObj.requestLevelId || ''"
+                                        name="requestLevelId" (change)="onLevelChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option selected="{{RequestObj.requestLevelId == level.id}}"
+                                            *ngFor="let level of lstLevels" value="{{level.id}}">
+                                            {{level.name}}</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label>Impacts</label>
+                                    <select class="form-control" [(ngModel)]="RequestObj.impactId" name="impactId">
+                                        <option value="" selected="true">Select One</option>
+                                        <option selected="{{RequestObj.impactId == imp.id}}"
+                                            *ngFor="let imp of lstImpacts" value="{{imp.id}}">
+                                            {{imp.name}}</option>
+                                    </select>
+                                </div>
+
+
+
+                                <div class="col-md-4">
+                                    <label>Periority</label>
+                                    <select class="form-control" [ngModel]="RequestObj.periorityId || ''"
+                                        name="periorityId" (change)="onPeriorityChange($event)">
+                                        <option value="">Select One</option>
+                                        <option selected="{{RequestObj.periorityId == per.id}}"
+                                            *ngFor="let per of lstPeriorities" value="{{per.id}}">
+                                            {{per.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Category</label>
+                                    <select class="form-control" [ngModel]="RequestObj.categoryId || ''"
+                                        name="categoryId" (change)="onCategoryChange($event)">
+                                        <option value="">Select One</option>
+                                        <option selected="{{RequestObj.categoryId == cat.id}}"
+                                            *ngFor="let cat of lstCategories" value="{{cat.id}}">
+                                            {{cat.name}}</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label>Sub Category</label>
+                                    <select class="form-control" [ngModel]="RequestObj.subCategoryId || ''"
+                                        name="subCategoryId" (change)="onSubCategoryChange($event)">
+                                        <option value="">Select One</option>
+                                        <option selected="{{RequestObj.subCategoryId == cat.id}}"
+                                            *ngFor="let cat of lstSubCategories" value="{{cat.id}}">
+                                            {{cat.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

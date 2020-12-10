@@ -1,0 +1,83 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <a [routerLink]="['/client']"  class="btn btn-outline-info btn-sm"><mat-icon style="margin-top: -10px;">recent_actors</mat-icon>Create</a>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Clients</h4>
+                    </div>
+                    <div class="card-body">
+                      
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe" style="width: 100%;">
+                                <thead>
+                                    <tr>    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Mobile
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Contact Person
+                                    </th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of lstClients">
+                                        <td>
+                                            {{item.id}}
+                                        </td>
+                                        <td>
+                                            {{item.name}}
+                                        </td>
+                                        <td>
+                                            {{item.mobile}}
+                                        </td>
+                                        <td>
+                                            {{item.email}}
+                                        </td>
+                                        <td>
+                                            {{item.contactPerson}}
+                                        </td>
+                                        <td>
+                                            <a [routerLink]="['/client', item.id]"><mat-icon style="color:#578cc5">edit</mat-icon></a>
+                                          </td>
+                                          <td><a (click)="DeleteClient(project.id)"><mat-icon style="color:#be5050" >delete</mat-icon></a>
+                                          </td>
+
+
+                                          
+                                        <!-- <td>
+                                            <a [routerLink]="['/client' , item.id]">
+                                                <mat-icon>edit</mat-icon>
+                                                </a>
+                                        </td>
+                                        <td> <button (click)="DeleteClient(item.id)">
+
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+
+                                        </td> -->
+                                </tbody>
+                            </table>
+                            <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+                      
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

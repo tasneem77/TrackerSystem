@@ -1,0 +1,78 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <a [routerLink]="['/timesheet']" class="btn btn-outline-info btn-sm"><mat-icon style="margin-top: -10px;">today</mat-icon>Create</a>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">TimeSheets</h4>
+                    </div>
+                    <div class="card-body">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe" style="width: 100%;">
+                                <thead class=" text-primary">
+                                    <tr>      <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Start Date
+                                    </th>
+                                    <th>
+                                        End Date
+                                    </th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th></tr>
+                                </thead>
+                                <tbody >
+                                    <tr *ngFor="let item of lstTimeSheets">
+                                        <td>
+                                            {{item.id}}
+                                        </td>
+                                   
+                                        <td>
+                                            {{item.title}}
+                                        </td>
+                                        <td>
+           
+
+                                            {{ item.startDate | date:'MM/dd/yyyy'}}
+                                        </td>
+
+                                        <td>
+           
+
+                                            {{ item.endDate | date:'MM/dd/yyyy'}}
+                                        </td>
+
+                                        <td>
+                                            <a [routerLink]="['/timesheet', item.id]"><mat-icon style="color:#578cc5">edit</mat-icon></a>
+                                          </td>
+                                          <td><a (click)="DeleteTimeSheet(item.id)"><mat-icon style="color:#be5050" >delete</mat-icon></a>
+                                          </td>
+                                        <!-- <th>
+                                            <a [routerLink]="['/timesheet' , item.id]">Edit</a>
+                                        </th>
+                                        <th> <button (click)="DeleteTimeSheet(item.id)">
+
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+
+                                        </th> -->
+                                </tbody>
+                            </table>
+                            <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+                       
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

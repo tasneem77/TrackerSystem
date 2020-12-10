@@ -1,0 +1,117 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <a [routerLink]="['/addrequestDetail']" class="btn btn-outline-info btn-sm">
+                    <mat-icon style="margin-top: -10px;">list</mat-icon>Create
+                </a>
+<!-- {{  roleName}}{{  userId}} -->
+                <!-- {{RequestId}} -->
+                <a [routerLink]="['/requestDetailCalendar' , RequestId,userId]" class="btn btn-outline-info btn-sm">
+                    <mat-icon style="margin-top: -10px;">today</mat-icon>Calendar
+                </a>
+
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Request Details</h4>
+                    </div>
+                    <div class="card-body" style="margin-top: 20px;">
+
+                        <!-- <mat-list>
+                            <mat-list-item *ngFor="let item of lstRequestDetails">
+                                <input type="hidden" value="item.id" />
+                                <h3 matLine> {{item.title}} / {{item.reqCode}} </h3>
+                                <p matLine> {{item.statusName}} </p>
+                                <p matLine class="demo-2">
+                                    {{item.actualStartDateTime}}
+                                    <br />
+                                    {{item.actualEndDateTime}}
+                                    <br />
+                                    {{item.plannedStartDateTime}}
+                                    <br />
+                                    {{item.plannedEndDateTime}}
+                                </p>
+                                <p matLine> 
+                                <a [routerLink]="" (click)="DeleteRequestDetail(item.id)">
+                                    <mat-icon style="color:#be5050">delete</mat-icon>
+                                </a></p>
+
+                            </mat-list-item>
+                        </mat-list> -->
+
+
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe"
+                            style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th> Code </th>
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Actual Start DateTime
+                                    </th>
+                                    <th>
+                                        Actual End DateTime
+                                    </th>
+                                    <th>
+                                        Planned Start DateTime
+                                    </th>
+                                    <th>
+                                        Planned End DateTime
+                                    </th>
+                                    <th *ngIf="roleName == 'SuperAdmin' || roleName == 'PMO'">
+                                        Delete
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let item of lstRequestDetails">
+                                <tr>
+                                    <td>
+                                        {{item.id}}
+                                    </td>
+                                    <td>
+                                        {{item.reqCode}}
+                                    </td>
+                                    <td>
+                                        {{item.title}}
+                                    </td>
+                                    <td>
+                                        {{item.statusName}}
+                                    </td>
+                                    <td>
+                                        {{item.actualStartDateTime}}
+                                    </td>
+                                    <td>
+                                        {{item.actualEndDateTime}}
+                                    </td>
+                                    <td>
+                                        {{item.plannedStartDateTime}}
+                                    </td>
+                                    <td>
+                                        {{item.plannedEndDateTime}}
+                                    </td>
+                                    <td *ngIf="roleName == 'SuperAdmin' || roleName == 'PMO'">
+                                        <a [routerLink]="" (click)="DeleteRequestDetail(item.id)">
+                                            <mat-icon style="color:#be5050">delete</mat-icon>
+                                        </a>
+                                    </td>
+                            </tbody>
+                        </table> 
+                        <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog> 
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

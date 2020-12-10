@@ -1,0 +1,61 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <a [routerLink]="['/task']"  class="btn btn-outline-info btn-sm"><mat-icon style="margin-top: -10px;">schedule</mat-icon>Create</a>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Tasks</h4>
+                    </div>
+                    <div class="card-body">
+                        
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe" style="width: 100%;">
+                                <thead>
+                                    <tr>          <th>
+                                        Id
+                                    </th>
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr  *ngFor="let item of lstTasks">
+                                        <td>
+                                            {{item.id}}
+                                        </td>
+
+                                        <td>
+                                            {{item.title}}
+                                        </td>
+
+                                        <td>
+                                            <a [routerLink]="['/task' , item.id]"><mat-icon style="color:#578cc5">edit</mat-icon></a>
+                                        </td>
+                                        <td> 
+                                               
+                                            <a [routerLink]="" (click)="DeleteTask(item.id)"> <mat-icon  style="color:#be5050">delete</mat-icon></a>
+ 
+                                            <!-- <button (click)="DeleteTask(item.id)">
+
+                                            <mat-icon  style="color:#be5050">delete</mat-icon>
+                                            </button> -->
+
+                                        </td>
+                                </tbody>
+                            </table>
+                            <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+                    
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

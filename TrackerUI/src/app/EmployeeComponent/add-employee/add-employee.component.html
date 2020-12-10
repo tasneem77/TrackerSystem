@@ -1,0 +1,74 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Add Employee</h4>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="submitData()">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Name</mat-label>
+                    <input matInput name="employeename" [(ngModel)]="EmployeeObj.Name" />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Phone</mat-label>
+                    <input matInput (keypress)="keyPressNumbers($event)" name="phone" [(ngModel)]="EmployeeObj.Phone" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>WhatsApp</mat-label>
+                    <input matInput (keypress)="keyPressNumbers($event)" name="whatsapp"
+                      [(ngModel)]="EmployeeObj.WhatsApp" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput type="date" name="DOB" [(ngModel)]="EmployeeObj.DOB" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>Team</mat-label>
+                    <mat-select [(ngModel)]="EmployeeObj.TeamId" name="teamId">
+                      <mat-option *ngFor="let item of lstTeams" [value]="item.id">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput name="email" [(ngModel)]="EmployeeObj.Email" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                  <mat-form-field>
+                    <mat-label>Address</mat-label>
+                    <textarea matInput name="address" [(ngModel)]="EmployeeObj.Address"></textarea>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                  <input type="file" accept="image/*" [(ngModel)]="EmployeeObj.EmpImg" name="EmpImg"
+                    (change)="onFileSelected($event.target.files)" />
+                </div>
+              </div>
+              <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

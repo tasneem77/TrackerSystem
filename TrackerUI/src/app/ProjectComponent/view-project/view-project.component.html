@@ -1,0 +1,128 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Project Detail</h4>
+                    </div>
+                    <div class="card-body">
+                        <mat-tab-group dynamicHeight mat-align-tabs="start">
+                            <mat-tab label="Project">
+                             
+                                    <div class="row">
+                                   
+                                        <div class="col-md-12">
+                                            <label>Client</label>
+                                            {{ProjectObj?.clientName}}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Organization</label>
+                                            {{ProjectObj?.organizationName}}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Name</label>
+                                            {{ProjectObj?.name}}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Description</label>
+                                            {{ProjectObj.discription}}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Start Date</label>
+                                            {{ProjectObj.startDate | date: 'yyyy-MM-dd'}}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>End Date</label>
+                                            {{ ProjectObj.endDate | date: 'yyyy-MM-dd' }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Start Time</label>{{ ProjectObj.startTime }}
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>End Time</label>
+                                            {{ ProjectObj.endTime }}
+                                        </div>
+
+                                    </div>
+                                    
+                                 
+                            </mat-tab>
+                            <mat-tab label="StakeHolders">
+
+                                <table class="stripe" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let itm1 of lstProjectStakeHolders">
+                                            <td>
+                                                {{ itm1.id }}
+                                            </td>
+                                            <td>
+                                                {{ itm1.pshName }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+
+                            </mat-tab>
+                            <mat-tab label="Project Teams">
+
+                                <table class="stripe" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Team</th>
+                                            <th>Employee</th>
+                                            <th>Position</th>
+                                            <th>Active/InActive</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of lstProjectTeamEmployees">
+                                            <td>
+                                                {{ item.projectTeamEmployeeId }}
+                                            </td>
+                                            <td>
+                                                {{ item.teamName }}
+                                            </td>
+                                            <td>
+                                                {{ item.employeeName }}
+                                            </td>
+                                            <td>
+                                                {{ item.positionName }}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm"
+                                                    (click)="Activate(item.projectTeamEmployeeId)">
+                                                    Activate
+                                                </button>
+                                                <div *ngIf="item.isActive == true" class="material-icons"
+                                                    style="color: green">
+                                                    check_circle_outline
+                                                </div>
+                                                <div *ngIf="item.isActive == false" class="material-icons"
+                                                    style="color: red">
+                                                    highlight_off
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

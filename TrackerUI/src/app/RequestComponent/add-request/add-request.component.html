@@ -1,0 +1,246 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Add Request</h4>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="submitForm()">
+                            <div class="row">
+                                      <div class="col-md-12">
+                                    <mat-form-field>
+                                        <mat-label>Organization</mat-label>
+                                        <mat-select [(ngModel)]="RequestObj.organizationId" name="organizationId"
+                                            (selectionChange)="onOrgChange($event)">
+                                            <mat-option *ngFor="let org of lstOrganizations" [value]="org.id">
+                                                {{org.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12">
+                                    <mat-form-field>
+                                        <mat-label>Request Type</mat-label>
+                                        <mat-select [(ngModel)]="RequestObj.requestTypeId" name="requestTypeId"
+                                            (selectionChange)="onTypeChange($event)">
+                                            <mat-option *ngFor="let item of lstRequestTypes" [value]="item.id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12">                                    
+                                    <mat-form-field>
+                                        <mat-label>Category</mat-label>
+                                        <mat-select [(ngModel)]="RequestObj.categoryId" name="categoryId"
+                                            (selectionChange)="onCategoryChange($event)">
+                                            <mat-option *ngFor="let cat of lstCategories" [value]="cat.id">
+                                                {{cat.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12">                                    
+                                    <mat-form-field>
+                                        <mat-label>Sub Category</mat-label>
+                                        <mat-select [(ngModel)]="RequestObj.subCategoryId" name="subCategoryId"
+                                            (selectionChange)="onSubCategoryChange($event)">
+                                            <mat-option *ngFor="let item of lstSubCategories" [value]="item.id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Status</label>
+                                    <select class="form-control" [ngModel]="RequestObj.requestStatusId || ''"
+                                        name="requestStatusId" (change)="onStatusChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let item of lstTypeStatus" value="{{item.id}}">{{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Request Modes</label>
+                                    <select class="form-control" [ngModel]="RequestObj.requestModeId || ''"
+                                        name="requestModeId" (change)="onModeChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let item of lstModes" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Impacts</label>
+                                    <select class="form-control" [ngModel]="RequestObj.impactId || ''" name="impactId"
+                                        (change)="onImpactChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let item of lstImpacts" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Periority</label>
+                                    <select class="form-control" [ngModel]="RequestObj.periorityId || ''"
+                                        name="impactId" (change)="onPeriorityChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let item of lstPeriorities" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Request Level</label>
+                                    <select class="form-control" [ngModel]="RequestObj.requestLevelId || ''"
+                                        name="requestLevelId" (change)="onLevelChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let item of lstLevels" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <mat-form-field>
+                                        <mat-label>Project</mat-label>
+                                        <mat-select [(ngModel)]="RequestObj.projectId" name="projectId"
+                                            (selectionChange)="onProjectChange($event)">
+                                            <mat-option *ngFor="let item of lstProjects" [value]="item.id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class="col-md-12">
+                                    <label>Select Client / Employee </label>
+                                    <div *ngFor="let cat of categoryList;let i = index;">
+                                        <input type="radio" [value]="cat"
+                                            (change)="getCategoryRadio(selectedCategory.id)"
+                                            [checked]="selectedCategory == 1 ? true : false"
+                                            [(ngModel)]="selectedCategory"  [ngModelOptions]="{standalone: true}" />
+                                        {{cat.name}}
+                                    </div>
+                                </div> 
+                                <div class="col-md-12">
+                                    <br/> <br/>
+                                </div>-->
+                                <div class="col-md-12">
+                                    <label>Client</label>
+                                    <select class="form-control" [ngModel]="RequestObj.clientId || ''" name="clientId"
+                                        (change)="onClientChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let item of lstClients" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <!--
+                                    *ngIf="selectedCategory.id ===1 || selectedCategory.id === null
+                                    <div class="col-md-12" *ngIf="selectedCategory.id ===2">
+                                    <label>Employee</label>
+                                    <select class="form-control" [ngModel]="RequestObj.employeeId || ''" name="empId"
+                                        (change)="onEmployeeChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let emp of lstEmployees" value="{{emp.id}}">
+                                            {{emp.name}}</option>
+                                    </select>
+                                </div> -->
+                                <div class="col-md-12">
+                                    <label>Subject</label>
+                                    <input class="form-control" [(ngModel)]="RequestObj.subject" name="subject" />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Description</label>
+                                    <angular-editor [config]="editorConfig" [(ngModel)]="RequestObj.description"
+                                        [ngModelOptions]="{standalone: true}"></angular-editor>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Created Date</label>
+                                    <input class="form-control" type="date" [(ngModel)]="RequestObj.createdDate"
+                                        name="createdDate" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Created Time</label>
+                                    <input class="form-control" type="time" [(ngModel)]="RequestObj.createdTime"
+                                        name="createdTime" />
+                                </div>
+
+
+                                <!-- <div class="col-md-6">
+                                    <label>Respond Date</label>
+                                    <input class="form-control" type="date" [(ngModel)]="RequestObj.respondDate"
+                                        name="createdDate" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Respond Time</label>
+                                    <input class="form-control" type="time" [(ngModel)]="RequestObj.respondTime"
+                                        name="createdTime" />
+                                </div>
+ -->
+
+
+                                <!-- <div class="col-md-6">
+                                    <label>Schedule Started Date</label>
+                                    <input class="form-control" type="date" [(ngModel)]="RequestObj.scheduleStartedDate"
+                                        name="scheduleStartedDate" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Schedule Ended Date</label>
+                                    <input class="form-control" type="date" [(ngModel)]="RequestObj.scheduleEndedDate"
+                                        name="scheduleEndedDate" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Schedule Started Time</label>
+                                    <input class="form-control" type="time" [(ngModel)]="RequestObj.scheduleStartedTime"
+                                        name="scheduleStartedTime" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Schedule Ended Time</label>
+                                    <input class="form-control" type="time" [(ngModel)]="RequestObj.scheduleEndedTime"
+                                        name="scheduleEndedTime" />
+                                </div>
+ -->
+
+
+                              
+                                <!--      <div class="col-md-4">
+                                    <label>Request Level</label>
+                                    <select class="form-control" [ngModel]="RequestObj.requestLevelId || ''"
+                                        name="requestLevelId" (change)="onLevelChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let item of lstLevels" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Urgency</label>
+                                    <select class="form-control" [ngModel]="RequestObj.urgencyId || ''" name="urgencyId"
+                                        (change)="onUrgentChange($event)">
+                                        <option value="">Select One</option>
+                                        <option *ngFor="let item of lstUrgencies" value="{{item.id}}">{{item.name}}
+                                        </option>
+                                    </select>
+                                </div> -->
+
+                                
+
+                                <div class="col-md-12">
+                                    <label>Note</label>
+                                    <textarea class="form-control" [(ngModel)]="RequestObj.note" name="note"></textarea>
+                                </div>
+
+
+                            </div>
+
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

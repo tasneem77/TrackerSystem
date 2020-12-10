@@ -1,0 +1,163 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <a *ngIf="userRole == 'PMO' || userRole == 'SuperAdmin'"  [routerLink]="['/request']" class="btn btn-outline-info btn-sm">
+                    <mat-icon style="margin-top: -10px;">list</mat-icon>Create
+                </a>
+                <br />
+                <a [routerLink]="['/requestCalendar']" class="btn btn-outline-info btn-sm">
+                    <mat-icon style="margin-top: -10px;">today</mat-icon>Calendar
+                </a>
+                <br />
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Requests</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label>Projects</mat-label>
+                                <mat-select name="projectId" (selectionChange)="onProjectChange($event)">
+                                    <mat-option *ngFor="let pro of lstProjects" [value]="pro.id">
+                                        {{pro.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label>Periority</mat-label>
+                                <mat-select name="periorityId" (selectionChange)="onPeriorityChange($event)">
+                                    <mat-option *ngFor="let per of lstPeriorities" [value]="per.id">
+                                        {{per.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label>Status</mat-label>
+                                <mat-select name="statusId" (selectionChange)="onStatusChange($event)">
+                                    <mat-option *ngFor="let stat of lstStatus" [value]="stat.id">
+                                        {{stat.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label>Category</mat-label>
+                                <mat-select name="categoryId" (selectionChange)="onCategoryChange($event)">
+                                    <mat-option *ngFor="let cat of lstCategories" [value]="cat.id">
+                                        {{cat.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="row" style="margin-left: 3px;">
+
+                            <div class="col-md-5">
+                                <input class="form-control" type="date" name="startDate" value=""
+                                    (change)="onStartDateChange($event.target.value)" />
+
+
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" type="date" name="endDate" value=""
+                                    (change)="onEndDateChange($event.target.value)" />
+                            </div>
+                            <div class="col-md-1">
+                                <button (click)="searchbyDate()" id="btnSearch">Search</button>
+                            </div>
+
+                        </div>
+                        <br /><br />
+
+
+
+                        <div class="col-md-12">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe"
+                                style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            Code
+                                        </th>
+                                        <th>
+                                            Subject
+                                        </th>
+                                        <th>
+                                            Periority
+                                        </th>
+                                        <th> Status</th>
+                                        <th>
+                                            Details
+                                        </th>
+                                        <th *ngIf="roleName == 'SuperAdmin' || roleName == 'PMO'">
+                                            Edit
+                                        </th>
+                                        <th *ngIf="roleName == 'SuperAdmin' || roleName == 'PMO'">
+                                            Delete
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let item of lstRequests">
+                                    <tr>
+                                        <td>
+                                            {{item.id}}
+                                        </td>
+                                        <td>
+                                            {{item.reqCode}}
+                                        </td>
+                                        <td>
+                                            {{item.subject}}
+                                        </td>
+                                        <td>
+                                            <div *ngIf="item.periorityId ==1">
+                                                <img src="../../assets/images/high-priority-icon_1.png" width="20"
+                                                    height="20" />
+                                            </div>
+                                            <div *ngIf="item.periorityId ==2">
+                                                <img src="../../assets/images/low-priority-icon_1.png" width="20"
+                                                    height="20" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{item.statusName}}
+
+                                        </td>
+                                        <td>
+                                            <a [routerLink]="['/requestDetails' , item.id]">
+                                                <mat-icon style="color:#578cc5">reorder</mat-icon>
+                                            </a>
+                                        </td>
+                                        <td *ngIf="roleName == 'SuperAdmin' || roleName == 'PMO'">
+                                            <a [routerLink]="['/request' , item.id]">
+                                                <mat-icon style="color:#578cc5">edit</mat-icon>
+                                            </a>
+                                        </td>
+                                        <td *ngIf="roleName == 'SuperAdmin' || roleName == 'PMO'">
+                                            <a [routerLink]="" (click)="DeleteRequest(item.id)">
+                                                <mat-icon style="color:#be5050">delete</mat-icon>
+                                            </a>
+                                        </td>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

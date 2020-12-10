@@ -1,0 +1,169 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Add Problem</h4>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="submitForm()">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Title</label>
+                                    <input class="form-control" [(ngModel)]="ProblemObj.title" name="subject" />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Note</label>
+                                    <textarea class="form-control" [(ngModel)]="ProblemObj.description" name="note"></textarea>
+                                </div>
+<!-- 
+                                <div class="col-md-12">
+                                    <label>Description</label>
+                                    <textarea class="form-control" [(ngModel)]="ProblemObj.description"
+                                        name="desc"></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Created Date</label>
+                                    <input class="form-control" type="date" [(ngModel)]="ProblemObj.createdDate"
+                                        name="createdDate" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Created Time</label>
+                                    <input class="form-control" type="time" [(ngModel)]="ProblemObj.createdTime"
+                                        name="createdTime" />
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label>Respond Date</label>
+                                    <input class="form-control" type="date" [(ngModel)]="ProblemObj.respondDate"
+                                        name="createdDate" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Respond Time</label>
+                                    <input class="form-control" type="time" [(ngModel)]="ProblemObj.respondTime"
+                                        name="createdTime" />
+                                </div> -->
+
+
+
+                                 <div class="col-md-6">
+                                    <label>Due Date</label>
+                                    <input class="form-control" type="date" [(ngModel)]="ProblemObj.dueDate"
+                                        name="dueDate" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Closed Date</label>
+                                    <input class="form-control" type="date" [(ngModel)]="ProblemObj.closedDate"
+                                        name="closedDate" />
+                                </div> 
+
+
+                                <div class="col-md-4">
+                                    <label>Request Type</label>
+                                    <select class="form-control" [ngModel]="ProblemObj.requestTypeId ||''"
+                                        name="requestTypeId"   (change)="onTypeChange($event)" >
+                                        <option value="" selected>Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstRequestTypes"
+                                            value="{{item.id}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Status</label>
+                                    <select class="form-control" [ngModel]="ProblemObj.requestStatusId || ''"
+                                        name="requestStatusId"  (change)="onStatusChange($event)" >
+                                        <option value="" selected="true">Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstTypeStatus"
+                                            value="{{item.id}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Request Modes</label>
+                                    <select class="form-control"  [ngModel]="ProblemObj.requestModeId || ''"
+                                        name="requestModeId"  (change)="onModeChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstModes" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Request Level</label>
+                                    <select class="form-control" [ngModel]="ProblemObj.requestLevelId || ''"
+                                        name="requestLevelId" (change)="onLevelChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstLevels" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Urgency</label>
+                                    <select class="form-control" [ngModel]="ProblemObj.urgencyId || ''"
+                                     name="urgencyId" (change)="onUrgentChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstUrgencies"
+                                            value="{{item.id}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Impacts</label>
+                                    <select class="form-control" [ngModel]="ProblemObj.impactId || ''"
+                                     name="impactId" (change)="onImpactChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstImpacts" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+
+
+                                
+                                <div class="col-md-4">
+                                    <label>Periority</label>
+                                    <select class="form-control" [ngModel]="ProblemObj.periorityId || ''"
+                                     name="impactId" (change)="onPeriorityChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstPeriorities" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Category</label>
+                                    <select class="form-control" [ngModel]="ProblemObj.categoryId || ''"
+                                     name="impactId" (change)="onCategoryChange($event)">
+                                        <option value="" selected="true">Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstCategories" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label>Client</label>
+                                    <select class="form-control" [ngModel]="ProblemObj.clientId || ''"
+                                     name="impactId" (change)="onClientChange($event)">
+                                        <option value="">Select One</option>
+                                        <option title="Select One" *ngFor="let item of lstClients" value="{{item.id}}">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

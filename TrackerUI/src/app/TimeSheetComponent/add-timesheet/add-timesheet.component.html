@@ -1,0 +1,88 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Add TimeSheet</h4>
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="submitForm()">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Title</label>
+                    <input class="form-control" [(ngModel)]="TimeSheetObj.title" name="tstitle"/>
+                  </div>
+                  <div class="col-md-12">
+                    <label>Comment</label>
+                    <angular-editor  [config]="editorConfig" [(ngModel)]="TimeSheetObj.comment" [ngModelOptions]="{standalone: true}"></angular-editor>
+                  </div>
+                  <div class="col-md-12">
+                    <label>Complete Percentage</label>
+                    <input class="form-control" [(ngModel)]="TimeSheetObj.completePercent" [ngModelOptions]="{standalone: true}" />
+                  </div>
+                  <div class="col-md-6">
+                    <label>Start Date</label>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker" value="{{TimeSheetObj.startDate | date:'yyyy-MM-dd'}}"
+                      [(ngModel)]="TimeSheetObj.startDate" name="startDate">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <label>End Date</label>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker2" value="{{TimeSheetObj.endDate | date:'yyyy-MM-dd'}}"
+                      [(ngModel)]="TimeSheetObj.endDate"  name="endDate"/>
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                       <label>Start Time</label>
+                    <input type="time" class="form-control" 
+                      [(ngModel)]="TimeSheetObj.startTime" name="startTime" [ngModelOptions]="{standalone: true}" />
+                  </div>
+                  <div class="col-md-6">
+                    <label>End Time</label>
+                    <input type="time" class="form-control" 
+                      [(ngModel)]="TimeSheetObj.endTime" name="endTime" [ngModelOptions]="{standalone: true}" />
+                  </div>
+                             <div class="col-md-4">
+                    <label>Employee</label>
+                     <select class="form-control" [(ngModel)]="TimeSheetObj.employeeId" name="teamId">
+                        <option  value="">Select One</option>
+                        <option title="Select One"  *ngFor="let item of lstEmployees" value="{{item.id}}">{{item.name}}</option>
+                    </select> 
+                  </div>
+                  <div class="col-md-4">
+                    <label>Task</label>
+                     <select class="form-control" [(ngModel)]="TimeSheetObj.taskId" name="teamId">
+                        <option  value="">Select One</option>
+                        <option title="Select One"  *ngFor="let item of lstTasks" value="{{item.id}}">{{item.title}}</option>
+                    </select> 
+                  </div>
+
+                  
+                  <div class="col-md-4">
+                    <label>Status</label>
+                     <select class="form-control" [(ngModel)]="TimeSheetObj.statusId" name="teamId">
+                        <option  value="">Select One</option>
+                        <option title="Select One"  *ngFor="let item of lstStatus" value="{{item.id}}">{{item.statusName}}</option>
+                    </select> 
+                  </div>
+          
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                <div class="clearfix"></div>
+                </div>
+            
+         
+              </form>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>

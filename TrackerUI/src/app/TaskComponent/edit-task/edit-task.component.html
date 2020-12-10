@@ -1,0 +1,173 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Edit Task</h4>
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="SubmitData()">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Projects</label>
+                    <select class="form-control"  [(ngModel)]="TaskObj.projectId" name="ddlProject" #ddlProject disabled  >
+                  <option value="">Select One</option>
+                      <option *ngFor="let item of lstProjects" value="{{item.id}}" [selected]="TaskObj.projectId == item.id">{{item.name}}</option>
+                  </select>
+                  </div>
+                    <div class="col-md-12">
+                        <label>MileStoneId</label>
+                        <select class="form-control" [(ngModel)]="TaskObj.mileStoneId" name="ddlMileStone" #ddlProject >
+                          <option value="" selected="true">Select One</option>
+                          <option *ngFor="let item of lstMileStones" value="{{item.id}}">{{item.title}}</option>
+                      </select>
+                      </div>
+                  <div class="col-md-12">
+                    <label>Name</label>
+                    <input class="form-control" [(ngModel)]="TaskObj.title" name="taskname"
+                      [ngModelOptions]="{standalone: true}" />
+                  </div>
+
+                  <div class="col-md-12">
+                    <label>Brief</label>
+                    <angular-editor  [config]="editorConfig" [(ngModel)]="TaskObj.brief" [ngModelOptions]="{standalone: true}"></angular-editor>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Start Date</label>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker" value="{{TaskObj.startDate | date:'yyyy-MM-dd'}}"
+                      [(ngModel)]="TaskObj.startDate"   (dateChange)="addStartDate('change', $event)" name="startDate">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <label>End Date</label>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker2" value="{{TaskObj.endDate | date:'yyyy-MM-dd'}}"
+                      [(ngModel)]="TaskObj.endDate" (dateChange)="addEndDate('change', $event)" name="endDate"/>
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6"> <label>Start Time</label>
+                    <input type="time" class="form-control" value="{{TaskObj.startTime}}"
+                      [(ngModel)]="TaskObj.startTime" name="startTime" [ngModelOptions]="{standalone: true}" />
+                  </div>
+                  <div class="col-md-6">
+                    <label>End Time</label>
+                    <input type="time" class="form-control" value="{{TaskObj.endTime}}"
+                      [(ngModel)]="TaskObj.endTime" name="endTime" [ngModelOptions]="{standalone: true}" />
+                  </div>
+             
+            
+                </div>
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                <div class="clearfix"></div>
+              </form>
+
+  
+  
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Team</label>
+                  <select class="form-control" name="ddlTeam" #ddlTeam (change)="onTeamChange($event)">
+                    <option value="" selected="true">Select One</option>
+                    <option *ngFor="let team of lstTeams" value="{{team.id}}">{{team.name}}</option>
+                  </select>
+                </div>
+                <div class="col-md-12">
+                  <label for="options">Employees:</label>
+                  <div *ngFor="let emp of lstEmployees">
+                    <label>
+                      <input type="checkbox" name="chkbxemployees" value="{{emp.value}}" [(ngModel)]="emp.checked" />
+                      {{emp.name}}
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <button type="button"  class="btn btn-default" (click)="addRow()">Add</button>
+                </div>
+                <div class="col-md-12">
+                  <table class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Action</th>
+                        <th>Emp Name</th>
+                        <th>team Name</th>
+                        <th>Employee ID</th>
+                        <th>Team ID</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let dynamic of dynamicArray; let i = index;">
+                        <td (click)="deleteRow(i)">
+                          <i class="fa fa-trash fa-2x"></i>
+                        </td>
+                        <td>
+                          {{dynamicArray[i].employeename}}
+                        </td>
+                        <td>
+                          {{dynamicArray[i].teamName}}
+                        </td>
+                        <td>
+                          {{dynamicArray[i].employeeId}}
+                        </td>
+                        <td>
+                          {{dynamicArray[i].teamId}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button type="button" (click)="submitTeamEmployees()" class="btn btn-danger pull-right">Save</button>
+                </div>
+              </div>
+  
+  
+  
+  
+              <table class="table">
+                <thead class="text-primary">
+                  <th>
+                    Id
+                  </th>
+                  <th>
+                    Team Name
+                  </th>
+                  <th>
+                    Employee Name
+                  </th>
+            
+                   <th>
+                    Delete
+                  </th> 
+                </thead>
+                <tbody *ngFor="let item of ListTaskMileStoneEmployees">
+                  <tr>
+                    <td>
+                      {{item.taskMileStoneEmployeeId}}
+                    </td>
+                    <td>
+                      {{item.teamName}}
+                    </td>
+                    <td>
+                      {{item.employeeName}}
+                    </td>
+            
+                  <td>
+                     <button 
+                    (click)="DeleteTaskMileStoneEmployee(item.taskMileStoneEmployeeId)">
+                     <mat-icon>delete</mat-icon> 
+                    </button>
+                </td> 
+                </tbody>
+              </table> 
+              <p-confirmDialog  [style]="{width: '50vw'}"></p-confirmDialog>
+                     
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

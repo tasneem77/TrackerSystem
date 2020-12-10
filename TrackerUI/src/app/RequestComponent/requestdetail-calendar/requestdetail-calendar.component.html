@@ -1,0 +1,37 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Request Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                          
+                            <mat-radio-group name="opList"  fxLayout="column">  
+                                <mat-label>Select Planned / Actual </mat-label>
+                                <br/>
+                                <mat-radio-button *ngFor="let cat of ActualPannedDateTime"
+                                [value]="cat.id" 
+                                (change)="radioChange($event)"
+                                [checked]="cat.checked" name="opList" >{{ cat.name}}</mat-radio-button>
+                              </mat-radio-group>
+
+
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <full-calendar id="myCalendar" [options]="calendarOptions"></full-calendar>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

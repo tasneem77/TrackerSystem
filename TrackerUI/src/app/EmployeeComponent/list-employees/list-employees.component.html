@@ -1,0 +1,73 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <a [routerLink]="['/employee']" class="btn btn-outline-info btn-sm"><mat-icon style="margin-top: -10px;">people</mat-icon>Create</a>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Employee Table</h4>
+        
+                    </div>
+                    <div class="card-body">
+                     
+                            <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="stripe" style="width: 100%;">
+                                <thead>
+                                    <tr> 
+                                            <th>
+                                        ID
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                    <th>
+                                        Team
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Phone
+                                    </th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let emp of lstEmployees">
+                                        <td>
+                                            {{emp.id}}
+                                        </td>
+                                        <td>
+                                           <img  src="http://localhost:49773/{{emp.empImg}}" alt="" style="width: 70px ;height: 70px; margin: 5px 0px; border-radius: 5px;"
+                                             /> 
+                                        </td>
+                                        <td>
+                                            {{emp.teamName}}
+                                        </td>
+                                        <td>
+                                            {{emp.name}}
+                                        </td>
+                                        <td>
+                                            {{emp.phone}}
+                                        </td>
+                                        <td>
+                                            <a [routerLink]="['/employee', emp.id]"><mat-icon style="color:#578cc5">edit</mat-icon></a>
+                                          </td>
+                                          <td><a (click)="DeleteEmployee(emp.id)"><mat-icon style="color:#be5050" >delete</mat-icon></a>
+                                          </td>
+                     
+                                </tbody>
+                            </table>
+                            <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+  </div>
